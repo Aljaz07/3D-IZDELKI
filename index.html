@@ -186,30 +186,6 @@
       align-items: center;
       margin-top: 12px;
     }
-    
-    .comment-input {
-  background-color: #2563eb;
-  color: white;
-  font-weight: 600;
-  padding: 10px 18px;
-  border-radius: 8px;
-  border: none;
-  font-size: 0.95rem;
-  transition: background-color 0.3s ease;
-  user-select: none;
-  width: 15%;
-  box-sizing: border-box;
-  margin-top: 8px;
-  resize: vertical;
-}
-
-.comment-input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.comment-input:focus {
-  outline: 2px solid #93c5fd;
-}
 
     /* Košarica spodaj desno, bolj profesionalen izgled */
     #cart {
@@ -403,12 +379,6 @@
         <div class="color-circle bg-white-500" title="Bela" onclick="selectColor(this, 1, 'Bela')" role="button" tabindex="0"></div>
       </div>
 
-      <textarea id="generalComment"
-          class="comment-input"
-          placeholder="Želje (neobvezno)"
-          rows="3"></textarea>
-
-
       <div class="btn-group">
         <button class="btn-primary" onclick="showMoreInfo(1)">Več o izdelku</button>
         <button class="btn-add" aria-label="Dodaj Pokrovček za pijačo v košarico" onclick="addToCart(1)">+</button>
@@ -493,16 +463,17 @@
   </main>
 
 <div id="cart" aria-label="Košarica z izdelki" 
-     class="fixed top-5 right-5 w-72 bg-white bg-opacity-80 backdrop-blur-md rounded-xl shadow-lg z-[1000] p-4">
+     class="fixed top-5 right-5 w-72 max-h-[80vh] overflow-hidden bg-white bg-opacity-80 backdrop-blur-md rounded-xl shadow-lg z-[1000] p-4">
   <div id="cart-header" class="flex justify-between items-center mb-2">
     Košarica
     <button aria-label="Zapri košarico" onclick="toggleCart()" class="text-xl font-bold">×</button>
   </div>
-  <div id="cart-items" role="list"></div>
+
+  <div id="cart-items" role="list" class="overflow-y-auto max-h-[50vh] pr-2"></div>
+
   <div id="cart-total" aria-live="polite"></div>
   <button id="cart-send" onclick="sendInquiry()" style="display:none;" class="mt-4 bg-blue-600 text-white py-2 rounded">Pošlji povpraševanje</button>
 </div>
-  <button id="cart-toggle-btn" aria-label="Odpri košarico" onclick="toggleCart()">🛒</button>
 
 <script>
   const products = {
@@ -615,14 +586,6 @@
     Object.values(cart).forEach(item => {
       body += `- ${item.name} (${item.color}), količina: ${item.quantity}, cena na kos: ${item.price} €%0D%0A`;
     });
-     if (item.comment) {
-      body += ` – komentar: ${item.comment}`;
-    }
-  // Dodajemo skupen komentar iz <textarea>
-  const generalComment = document.getElementById("generalComment").value.trim();
-  if (generalComment) {
-    body += `%0D%0AOpomba: ${encodeURIComponent(generalComment)}%0D%0A`;
-  }
     body += '%0D%0ALep pozdrav,%0D%0A[Vaše ime]';
 
     window.location.href = `mailto:info@tvojadomena.si?subject=Povpraševanje 3D izdelki&body=${body}`;
@@ -633,6 +596,18 @@ function showMoreInfo(productId) {
   window.location.href = `izdelek${productId}.html`;
 }
   
+window.addEventListener('scroll', () => {
+  const cart = document.getElementById('cart');
+  const offsetTop = 20; // koliko px od vrha naj bo
+  if (window.scrollY > cart.offsetTop - offsetTop) {
+    cart.style.position = 'fixed';
+    cart.style.top = offsetTop + 'px';
+  } else {
+    cart.style.position = 'static';
+    cart.style.top = 'auto';
+  }
+});
+
   // Inicijaliziraj košarico ob nalaganju strani
   updateCartUI();
 

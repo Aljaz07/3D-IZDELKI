@@ -197,7 +197,7 @@
   font-size: 0.95rem;
   transition: background-color 0.3s ease;
   user-select: none;
-  width: 100%;
+  width: 15%;
   box-sizing: border-box;
   margin-top: 8px;
   resize: vertical;
@@ -402,6 +402,12 @@
         <div class="color-circle bg-gray-500" title="Siva" onclick="selectColor(this, 1, 'Siva')" role="button" tabindex="0"></div>
         <div class="color-circle bg-white-500" title="Bela" onclick="selectColor(this, 1, 'Bela')" role="button" tabindex="0"></div>
       </div>
+
+      <textarea id="generalComment"
+          class="comment-input"
+          placeholder="Želje (neobvezno)"
+          rows="3"></textarea>
+
 
       <div class="btn-group">
         <button class="btn-primary" onclick="showMoreInfo(1)">Več o izdelku</button>
@@ -612,6 +618,11 @@
      if (item.comment) {
       body += ` – komentar: ${item.comment}`;
     }
+  // Dodajemo skupen komentar iz <textarea>
+  const generalComment = document.getElementById("generalComment").value.trim();
+  if (generalComment) {
+    body += `%0D%0AOpomba: ${encodeURIComponent(generalComment)}%0D%0A`;
+  }
     body += '%0D%0ALep pozdrav,%0D%0A[Vaše ime]';
 
     window.location.href = `mailto:info@tvojadomena.si?subject=Povpraševanje 3D izdelki&body=${body}`;
@@ -622,18 +633,6 @@ function showMoreInfo(productId) {
   window.location.href = `izdelek${productId}.html`;
 }
   
-window.addEventListener('scroll', () => {
-  const cart = document.getElementById('cart');
-  const offsetTop = 20; // koliko px od vrha naj bo
-  if (window.scrollY > cart.offsetTop - offsetTop) {
-    cart.style.position = 'fixed';
-    cart.style.top = offsetTop + 'px';
-  } else {
-    cart.style.position = 'static';
-    cart.style.top = 'auto';
-  }
-});
-
   // Inicijaliziraj košarico ob nalaganju strani
   updateCartUI();
 

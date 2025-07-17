@@ -189,7 +189,7 @@
 
     /* Košarica spodaj desno, bolj profesionalen izgled */
     #cart {
-      position: absolute;
+      position: fixed;
       bottom: 20px;
       right: 20px;
       width: 360px;
@@ -313,7 +313,7 @@
 
     /* Gumb za odpiranje košarice (majhen) */
     #cart-toggle-btn {
-      position: absolute;
+      position: fixed;
       bottom: 20px;
       right: 20px;
       width: 56px;
@@ -463,7 +463,7 @@
   </main>
 
 <div id="cart" aria-label="Košarica z izdelki" 
-     class="absolute top-5 right-5 w-72 max-h-[80vh] overflow-hidden bg-white bg-opacity-80 backdrop-blur-md rounded-xl shadow-lg z-[1000] p-4">
+     class="fixed top-5 right-5 w-72 max-h-[80vh] overflow-hidden bg-white bg-opacity-80 backdrop-blur-md rounded-xl shadow-lg z-[1000] p-4">
   <div id="cart-header" class="flex justify-between items-center mb-2">
     Košarica
     <button aria-label="Zapri košarico" onclick="toggleCart()" class="text-xl font-bold">×</button>

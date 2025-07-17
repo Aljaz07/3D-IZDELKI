@@ -186,6 +186,30 @@
       align-items: center;
       margin-top: 12px;
     }
+    
+    .comment-input {
+  background-color: #2563eb;
+  color: white;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 8px;
+  resize: vertical;
+}
+
+.comment-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.comment-input:focus {
+  outline: 2px solid #93c5fd;
+}
 
     /* Košarica spodaj desno, bolj profesionalen izgled */
     #cart {
@@ -585,6 +609,9 @@
     Object.values(cart).forEach(item => {
       body += `- ${item.name} (${item.color}), količina: ${item.quantity}, cena na kos: ${item.price} €%0D%0A`;
     });
+     if (item.comment) {
+      body += ` – komentar: ${item.comment}`;
+    }
     body += '%0D%0ALep pozdrav,%0D%0A[Vaše ime]';
 
     window.location.href = `mailto:info@tvojadomena.si?subject=Povpraševanje 3D izdelki&body=${body}`;

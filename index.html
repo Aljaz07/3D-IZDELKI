@@ -384,10 +384,7 @@
          class="btn-primary" 
          placeholder="Komentar za dizajn (opcijsko)" 
          oninput="saveComment(this, 1)">
-  <button class="text-sm text-gray-500 underline hover:text-blue-600" onclick="toggleCommentInput(this)">
-    Dodaj komentar
-  </button>
-</div>
+        </div>
 
       <div class="btn-group">
         <button class="btn-primary" onclick="showMoreInfo(1)">Več o izdelku</button>
@@ -489,17 +486,7 @@
     1: { id: 1, name: "Pokrovček za pijačo", price: 2 },
     2: { id: 2, name: "Izdelek 2", price: 129 }
   };
-
-  // Prikaži ali skrij input
-function toggleCommentInput(button) {
-  const container = button.closest('.relative');
-  const input = container.querySelector('.comment-input');
-  input.classList.toggle('hidden');
-  if (!input.classList.contains('hidden')) {
-    input.focus();
-  }
-}
-
+  
 // Shrani komentar v začasen pomnilnik
 const productComments = {};
 
@@ -643,6 +630,5 @@ window.addEventListener('scroll', () => {
   updateCartUI();
 
 </script>
-
 </body>
 </html>

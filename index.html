@@ -187,34 +187,6 @@
       margin-top: 12px;
     }
 
-    .comment-input {
-  background-color: #2563eb;
-  color: white;
-  font-weight: 600;
-  padding: 10px 18px;
-  border-radius: 8px;
-  border: none;
-  font-size: 0.95rem;
-  transition: background-color 0.3s ease;
-  user-select: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  width: 15%; /* ali custom širina */
-}
-
-.comment-input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.comment-input:hover {
-  background-color: #1d4ed8;
-}
-
-.comment-input:focus {
-  outline: 2px solid #93c5fd; /* svetlo modra obroba */
-}
-
     /* Košarica spodaj desno, bolj profesionalen izgled */
     #cart {
       position: fixed;
@@ -407,11 +379,6 @@
         <div class="color-circle bg-white-500" title="Bela" onclick="selectColor(this, 1, 'Bela')" role="button" tabindex="0"></div>
       </div>
 
-      <input type="text"
-       class="comment-input"
-       placeholder="Komentar za dizajn (neobvezno)"
-       oninput="saveComment(this, 1)">
-      
       <div class="btn-group">
         <button class="btn-primary" onclick="showMoreInfo(1)">Več o izdelku</button>
         <button class="btn-add" aria-label="Dodaj Pokrovček za pijačo v košarico" onclick="addToCart(1)">+</button>
@@ -522,17 +489,9 @@
     container.dataset.selectedColor = color;
   }
 
-  const productComments = {};
-  const cart = {};
-
-  function saveComment(input, productId) {
-  productComments[productId] = input.value.trim();
-}
-  
   function addToCart(productId) {
     const productCard = document.querySelector(`.product-card[data-product-id="${productId}"]`);
     const color = productCard.querySelector('.color-options').dataset.selectedColor || 'Brez barve';
-    const comment = productComments[productId] || '';
     const key = productId + color;
 
     if(cart[key]) {
@@ -543,7 +502,6 @@
         name: products[productId].name,
         price: products[productId].price,
         color,
-        comment: comment, 
         quantity: 1
       };
     }
@@ -627,9 +585,6 @@
     Object.values(cart).forEach(item => {
       body += `- ${item.name} (${item.color}), količina: ${item.quantity}, cena na kos: ${item.price} €%0D%0A`;
     });
-     if (item.comment) {
-        body += ` – komentar: ${item.comment}`;
-      }
     body += '%0D%0ALep pozdrav,%0D%0A[Vaše ime]';
 
     window.location.href = `mailto:info@tvojadomena.si?subject=Povpraševanje 3D izdelki&body=${body}`;

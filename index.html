@@ -187,25 +187,6 @@
       margin-top: 12px;
     }
 
-     .btn-comment {
-      background-color: #2563eb;
-      color: white;
-      font-weight: 600;
-      padding: 10px 18px;
-      border-radius: 8px;
-      cursor: pointer;
-      border: none;
-      font-size: 0.95rem;
-      transition: background-color 0.3s ease;
-      user-select: none;
-      display: inline-flex;
-      align-items: center;
-      width: 15%
-      gap: 8px;
-    }
-    .btn-comment:hover {
-      background-color: #1d4ed8;
-    }
     /* Košarica spodaj desno, bolj profesionalen izgled */
     #cart {
       position: fixed;
@@ -397,8 +378,6 @@
         <div class="color-circle bg-gray-500" title="Siva" onclick="selectColor(this, 1, 'Siva')" role="button" tabindex="0"></div>
         <div class="color-circle bg-white-500" title="Bela" onclick="selectColor(this, 1, 'Bela')" role="button" tabindex="0"></div>
       </div>
-
-      <input type="text" id="comment" placeholder="Opomba" class="btn-comment">
 
       <div class="btn-group">
         <button class="btn-primary" onclick="showMoreInfo(1)">Več o izdelku</button>
@@ -604,7 +583,7 @@
     }
     let body = 'Pozdravljeni,%0D%0A%0D%0APovprašujem za naslednje 3D izdelke:%0D%0A';
     Object.values(cart).forEach(item => {
-      body += `- ${item.name} (${item.color}), količina: ${item.quantity}, cena na kos: ${item.price} €%0D%0A`, ${comment}`;
+      body += `- ${item.name} (${item.color}), količina: ${item.quantity}, cena na kos: ${item.price} €%0D%0A`;
     });
     body += '%0D%0ALep pozdrav,%0D%0A[Vaše ime]';
 

@@ -365,22 +365,23 @@
   </header>
 
   <main class="grid gap-8 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" style="z-index: 10; position: relative;">
-    <!-- Izdelek 1 -->
+    <!-- Pokrovček za pijačo -->
     <div class="glass product-card" data-product-id="1">
       <img src="https://via.placeholder.com/300x200?text=Izdelek+1" alt="Izdelek 1" loading="lazy" />
-      <h2 class="product-title">Izdelek 1</h2>
-      <p class="product-desc">Edinstven ročno izdelan iz lesa.</p>
-      <p class="product-price">Cena: 99 €</p>
+      <h2 class="product-title">Pokrovček za pijačo</h2>
+      <p class="product-desc">Edinstven pokrovček za pijačo v pločevinki različnih dimenzij in različnih barv. Velik izbor različnih logotipov na pokrovčku.</p>
+      <p class="product-price">Cena: 2 €</p>
 
-      <div class="color-options" data-selected-color="Rumena" aria-label="Izbira barve izdelka 1">
-        <div class="color-circle bg-yellow-400 selected" title="Rumena" onclick="selectColor(this, 1, 'Rumena')" role="button" tabindex="0"></div>
+      <div class="color-options" data-selected-color="Črna" aria-label="Izbira barve pokrovčka za pijačo">
+        <div class="color-circle bg-black-500 selected" title="Črna" onclick="selectColor(this, 1, 'Črna')" role="button" tabindex="0"></div>
         <div class="color-circle bg-red-500" title="Rdeča" onclick="selectColor(this, 1, 'Rdeča')" role="button" tabindex="0"></div>
-        <div class="color-circle bg-blue-500" title="Modra" onclick="selectColor(this, 1, 'Modra')" role="button" tabindex="0"></div>
+        <div class="color-circle bg-gray-500" title="Siva" onclick="selectColor(this, 1, 'Siva')" role="button" tabindex="0"></div>
+        <div class="color-circle bg-white-500" title="Bela" onclick="selectColor(this, 1, 'Bela')" role="button" tabindex="0"></div>
       </div>
 
       <div class="btn-group">
         <button class="btn-primary" onclick="showMoreInfo(1)">Več o izdelku</button>
-        <button class="btn-add" aria-label="Dodaj Izdelek 1 v košarico" onclick="addToCart(1)">+</button>
+        <button class="btn-add" aria-label="Dodaj Pokrovček za pijačo v košarico" onclick="addToCart(1)">+</button>
       </div>
     </div>
 
@@ -593,6 +594,7 @@ function showMoreInfo(productId) {
   // Preusmeritev na podstran za izdelek, npr. izdelek1.html
   window.location.href = `izdelek${productId}.html`;
 }
+  
 window.addEventListener('scroll', () => {
   const cart = document.getElementById('cart');
   const offsetTop = 20; // koliko px od vrha naj bo

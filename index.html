@@ -587,8 +587,8 @@
     });
     body += '%0D%0ALep pozdrav,%0D%0A[Vaše ime]';
 
-    window.location.href = `mailto:info@tvojadomena.si?subject=Povpraševanje 3D izdelki&body=${body}`;
-  }
+  window.location.href = `mailto:info@tvojadomena.si?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
 
 function showMoreInfo(productId) {
   // Preusmeritev na podstran za izdelek, npr. izdelek1.html

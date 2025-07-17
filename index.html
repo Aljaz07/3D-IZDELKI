@@ -186,38 +186,6 @@
       align-items: center;
       margin-top: 12px;
     }
-    /* Gumb komentar */
-    .btn-comment {
-  background-color: #f97316; /* oranžna za razliko */
-  color: white;
-  font-weight: 700;
-  border-radius: 50%;
-  padding: 6px 12px;
-  font-size: 18px;
-  cursor: pointer;
-  border: none;
-  user-select: none;
-  transition: background-color 0.3s ease;
-  width: 38px;
-  height: 38px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.btn-comment:hover {
-  background-color: #ea580c;
-}
-
-.comment-input {
-  margin-top: 6px;
-  width: 100%;
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  display: none;
-}
 
     /* Košarica spodaj desno, bolj profesionalen izgled */
     #cart {
@@ -399,7 +367,7 @@
   <main class="grid gap-8 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" style="z-index: 10; position: relative;">
     <!-- Pokrovček za pijačo -->
     <div class="glass product-card" data-product-id="1">
-      <img src="https://via.placeholder.com/300x200?text=Izdelek+1" alt="Izdelek 1" loading="lazy" />
+      <img src="https://via.placeholder.com/300x200?text=Izdelek+1" alt="Primer Pokrovčka" loading="lazy" />
       <h2 class="product-title">Pokrovček za pijačo</h2>
       <p class="product-desc">Edinstven pokrovček za pijačo v pločevinki različnih dimenzij in različnih barv. Velik izbor različnih logotipov na pokrovčku.</p>
       <p class="product-price">Cena: 2 €</p>
@@ -408,13 +376,18 @@
         <div class="color-circle bg-black-400 selected" title="Črna" onclick="selectColor(this, 1, 'Črna')" role="button" tabindex="0"></div>
         <div class="color-circle bg-red-500" title="Rdeča" onclick="selectColor(this, 1, 'Rdeča')" role="button" tabindex="0"></div>
         <div class="color-circle bg-gray-500" title="Siva" onclick="selectColor(this, 1, 'Siva')" role="button" tabindex="0"></div>
-        <div class="color-circle bg-white-500" title="Bela" onclick="selectColor(this, 1, 'Bela')" role="button" tabindex="0"></div>
-         </div>
-
-      <div class="comment-wrapper" data-product-id="1">
-  <button class="btn-comment" title="Dodaj komentar" onclick="toggleCommentInput(this)">💬</button>
-  <input type="text" class="comment-input" placeholder="Komentar za dizajn..." oninput="saveComment(this, 1)">
+        <div class="color-circle bg-graywhite-500" title="Bela" onclick="selectColor(this, 1, 'Bela')" role="button" tabindex="0"></div>
       </div>
+
+      <div class="relative mt-2">
+  <input type="text" 
+         class="btn-primary" 
+         placeholder="Komentar za dizajn (opcijsko)" 
+         oninput="saveComment(this, 1)">
+  <button class="text-sm text-gray-500 underline hover:text-blue-600" onclick="toggleCommentInput(this)">
+    Dodaj komentar
+  </button>
+</div>
 
       <div class="btn-group">
         <button class="btn-primary" onclick="showMoreInfo(1)">Več o izdelku</button>
@@ -517,16 +490,18 @@
     2: { id: 2, name: "Izdelek 2", price: 129 }
   };
 
-  const productComments = {};
-
+  // Prikaži ali skrij input
 function toggleCommentInput(button) {
-  const wrapper = button.closest('.comment-wrapper');
-  const input = wrapper.querySelector('.comment-input');
-  input.classList.toggle('show');
-  if (input.classList.contains('show')) {
+  const container = button.closest('.relative');
+  const input = container.querySelector('.comment-input');
+  input.classList.toggle('hidden');
+  if (!input.classList.contains('hidden')) {
     input.focus();
   }
 }
+
+// Shrani komentar v začasen pomnilnik
+const productComments = {};
 
 function saveComment(input, productId) {
   productComments[productId] = input.value.trim();
@@ -638,10 +613,10 @@ function saveComment(input, productId) {
     let body = 'Pozdravljeni,%0D%0A%0D%0APovprašujem za naslednje 3D izdelke:%0D%0A';
     Object.values(cart).forEach(item => {
       body += `- ${item.name} (${item.color}), količina: ${item.quantity}, cena na kos: ${item.price} €%0D%0A`;
-      });
-      if (item.comment) {
-      body += `  Komentar: ${item.comment}\n`;
-      }
+     if (item.comment) {
+    body += `  Opomba: ${item.comment}\n`;
+  }
+});
     body += '%0D%0ALep pozdrav,%0D%0A[Vaše ime]';
 
     window.location.href = `mailto:info@tvojadomena.si?subject=Povpraševanje 3D izdelki&body=${body}`;

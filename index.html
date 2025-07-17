@@ -595,16 +595,22 @@ function showMoreInfo(productId) {
   window.location.href = `izdelek${productId}.html`;
 }
   
-window.addEventListener('scroll', () => {
+window.addEventListener('DOMContentLoaded', () => {
   const cart = document.getElementById('cart');
-  const offsetTop = 20; // koliko px od vrha naj bo
-  if (window.scrollY > cart.offsetTop - offsetTop) {
-    cart.style.position = 'fixed';
-    cart.style.top = offsetTop + 'px';
-  } else {
-    cart.style.position = 'static';
-    cart.style.top = 'auto';
-  }
+  if (!cart) return;
+
+  const offsetTop = 20;
+  const cartInitialPosition = cart.getBoundingClientRect().top + window.scrollY;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > cartInitialPosition - offsetTop) {
+      cart.style.position = 'fixed';
+      cart.style.top = offsetTop + 'px';
+    } else {
+      cart.style.position = 'static';
+      cart.style.top = 'auto';
+    }
+  });
 });
 
   // Inicijaliziraj košarico ob nalaganju strani

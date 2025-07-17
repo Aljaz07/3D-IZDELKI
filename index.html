@@ -379,6 +379,8 @@
         <div class="color-circle bg-white-500" title="Bela" onclick="selectColor(this, 1, 'Bela')" role="button" tabindex="0"></div>
       </div>
 
+      <input type="text" id="comment-input" placeholder="Opomba" class="btn-primary">
+
       <div class="btn-group">
         <button class="btn-primary" onclick="showMoreInfo(1)">Več o izdelku</button>
         <button class="btn-add" aria-label="Dodaj Pokrovček za pijačo v košarico" onclick="addToCart(1)">+</button>
@@ -583,7 +585,7 @@
     }
     let body = 'Pozdravljeni,%0D%0A%0D%0APovprašujem za naslednje 3D izdelke:%0D%0A';
     Object.values(cart).forEach(item => {
-      body += `- ${item.name} (${item.color}), količina: ${item.quantity}, cena na kos: ${item.price} €%0D%0A`;
+      body += `- ${item.name} (${item.color}), količina: ${item.quantity}, cena na kos: ${item.price} €%0D%0A`, ${comment}`;
     });
     body += '%0D%0ALep pozdrav,%0D%0A[Vaše ime]';
 

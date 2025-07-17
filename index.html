@@ -463,17 +463,16 @@
   </main>
 
 <div id="cart" aria-label="Košarica z izdelki" 
-     class="fixed top-5 right-5 w-72 max-h-[80vh] overflow-hidden bg-white bg-opacity-80 backdrop-blur-md rounded-xl shadow-lg z-[1000] p-4">
+     class="fixed top-5 right-5 w-72 bg-white bg-opacity-80 backdrop-blur-md rounded-xl shadow-lg z-[1000] p-4">
   <div id="cart-header" class="flex justify-between items-center mb-2">
     Košarica
     <button aria-label="Zapri košarico" onclick="toggleCart()" class="text-xl font-bold">×</button>
   </div>
-
-  <div id="cart-items" role="list" class="overflow-y-auto max-h-[50vh] pr-2"></div>
-
+  <div id="cart-items" role="list"></div>
   <div id="cart-total" aria-live="polite"></div>
   <button id="cart-send" onclick="sendInquiry()" style="display:none;" class="mt-4 bg-blue-600 text-white py-2 rounded">Pošlji povpraševanje</button>
 </div>
+  <button id="cart-toggle-btn" aria-label="Odpri košarico" onclick="toggleCart()">🛒</button>
 
 <script>
   const products = {
@@ -584,12 +583,12 @@
     }
     let body = 'Pozdravljeni,%0D%0A%0D%0APovprašujem za naslednje 3D izdelke:%0D%0A';
     Object.values(cart).forEach(item => {
-      body += `- ${item.name} (${item.color}), količina: ${item.quantity}, cena na kos: ${item.price} €%0D%0A`, /DODAJ OPOMBO/;
+      body += `- ${item.name} (${item.color}), količina: ${item.quantity}, cena na kos: ${item.price} €%0D%0A`;
     });
     body += '%0D%0ALep pozdrav,%0D%0A[Vaše ime]';
 
-   window.location.href = `mailto:info@tvojadomena.si?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
+    window.location.href = `mailto:info@tvojadomena.si?subject=Povpraševanje 3D izdelki&body=${body}`;
+  }
 
 function showMoreInfo(productId) {
   // Preusmeritev na podstran za izdelek, npr. izdelek1.html

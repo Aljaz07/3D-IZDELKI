@@ -186,7 +186,42 @@
       align-items: center;
       margin-top: 12px;
     }
+    /* Gumb komentar */
+    .btn-comment {
+  background-color: #f97316; /* oranžna za razliko */
+  color: white;
+  font-weight: 700;
+  border-radius: 50%;
+  padding: 6px 12px;
+  font-size: 18px;
+  cursor: pointer;
+  border: none;
+  user-select: none;
+  transition: background-color 0.3s ease;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.btn-comment:hover {
+  background-color: #ea580c;
+}
+
+.comment-input {
+  margin-top: 6px;
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  display: none;
+}
+
+.comment-input.show {
+  display: block;
+}
     /* Košarica spodaj desno, bolj profesionalen izgled */
     #cart {
       position: fixed;
@@ -377,6 +412,11 @@
         <div class="color-circle bg-red-500" title="Rdeča" onclick="selectColor(this, 1, 'Rdeča')" role="button" tabindex="0"></div>
         <div class="color-circle bg-gray-500" title="Siva" onclick="selectColor(this, 1, 'Siva')" role="button" tabindex="0"></div>
         <div class="color-circle bg-white-500" title="Bela" onclick="selectColor(this, 1, 'Bela')" role="button" tabindex="0"></div>
+         </div>
+
+      <div class="comment-wrapper" data-product-id="1">
+  <button class="btn-comment" title="Dodaj komentar" onclick="toggleCommentInput(this)">💬</button>
+  <input type="text" class="comment-input" placeholder="Komentar za dizajn..." oninput="saveComment(this, 1)">
       </div>
 
       <div class="btn-group">
@@ -476,9 +516,24 @@
 
 <script>
   const products = {
-    1: { id: 1, name: "Izdelek 1", price: 99 },
+    1: { id: 1, name: "Pokrovček za pijačo", price: 2 },
     2: { id: 2, name: "Izdelek 2", price: 129 }
   };
+
+  const productComments = {};
+
+function toggleCommentInput(button) {
+  const wrapper = button.closest('.comment-wrapper');
+  const input = wrapper.querySelector('.comment-input');
+  input.classList.toggle('show');
+  if (input.classList.contains('show')) {
+    input.focus();
+  }
+}
+
+function saveComment(input, productId) {
+  productComments[productId] = input.value.trim();
+}
 
   let cart = {};
 
@@ -492,6 +547,7 @@
   function addToCart(productId) {
     const productCard = document.querySelector(`.product-card[data-product-id="${productId}"]`);
     const color = productCard.querySelector('.color-options').dataset.selectedColor || 'Brez barve';
+    const comment = productComments[productId] || '';
     const key = productId + color;
 
     if(cart[key]) {
@@ -502,6 +558,7 @@
         name: products[productId].name,
         price: products[productId].price,
         color,
+        comment,
         quantity: 1
       };
     }
@@ -584,6 +641,8 @@
     let body = 'Pozdravljeni,%0D%0A%0D%0APovprašujem za naslednje 3D izdelke:%0D%0A';
     Object.values(cart).forEach(item => {
       body += `- ${item.name} (${item.color}), količina: ${item.quantity}, cena na kos: ${item.price} €%0D%0A`;
+      if (item.comment) {
+      body += `  Komentar: ${item.comment}\n`;
     });
     body += '%0D%0ALep pozdrav,%0D%0A[Vaše ime]';
 

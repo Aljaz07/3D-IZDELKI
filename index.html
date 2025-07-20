@@ -188,25 +188,24 @@
     }
 
     /* Košarica spodaj desno, bolj profesionalen izgled */
-    #cart {
-      position: sticky;
-      top: 20px;
-      width: 360px;
-      max-height: 500px;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-      color: #1f2937;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      z-index: 9999;
-      font-size: 14px;
-      user-select: none;
-      transform: translateY(110%);
-      opacity: 0;
-      transition: transform 0.4s ease, opacity 0.4s ease;
-    }
+#cart {
+  position: absolute;
+  top: 100px; /* začetna vrednost */
+  right: 20px;
+  width: 360px;
+  max-height: 500px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  color: #1f2937;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9999;
+  font-size: 14px;
+  user-select: none;
+  transition: top 0.4s ease;
+}
     #cart.open {
       transform: translateY(110%);
       opacity: 1;
@@ -312,8 +311,9 @@
 
     /* Gumb za odpiranje košarice (majhen) */
     #cart-toggle-btn {
-      position: sticky;
-      top: 20px;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
       width: 56px;
       height: 56px;
       background-color: #2563eb;
@@ -337,7 +337,7 @@
 
     /* Prikaz/skrivanje toggle gumba glede na stanje košarice */
     #cart.open + #cart-toggle-btn {
-      display: none;
+      display: flex;
     }
 
     /* Responsive za mobilne naprave */
@@ -462,24 +462,56 @@
     </div>
 
 <div id="cart" aria-label="Košarica z izdelki" 
-     class="sticky top-5 right-5 w-72 bg-white bg-opacity-80 backdrop-blur-md rounded-xl shadow-lg z-[1000] p-4">
+     class="fixed top-5 right-5 w-72 bg-white bg-opacity-80 backdrop-blur-md rounded-xl shadow-lg z-[1000] p-4">
   <div id="cart-header" class="flex justify-between items-center mb-2">
     Košarica
     <button aria-label="Zapri košarico" onclick="toggleCart()" class="text-xl font-bold">×</button>
   </div>
   <div id="cart-items" role="list"></div>
   <div id="cart-total" aria-live="polite"></div>
-  <button id="cart-send" onclick="sendInquiry()" style="display:none;" class="mt-4 bg-blue-600 text-white py-2 rounded">Pošlji povpraševanje</button>
+  <button id="cart-send" onclick="sendInquiry()" style="display: none;" class="mt-4 bg-blue-600 text-white py-2 rounded">Pošlji povpraševanje</button>
 </div>
-  <button id="cart-toggle-btn" aria-label="Odpri košarico" onclick="toggleCart()">🛒</button>
+  <button id="cart-toggle-btn" class="animate-bounce" aria-label="Odpri košarico" onclick="toggleCart()">🛒</button>
 <div>
 </div>
 </main>
+  
 <script>
   const products = {
     1: { id: 1, name: "Pokrovček za pijačo", price: 2 },
     2: { id: 2, name: "Izdelek 2", price: 129 }
   };
+
+  (function followScrollCart() {
+  const cart = document.getElementById('cart');
+  if (!cart) return;
+
+  let lastScrollY = window.scrollY;
+  let targetTop = lastScrollY + 100;
+
+  function animateCartPosition() {
+    const currentTop = parseFloat(cart.style.top) || 0;
+    const delta = (targetTop - currentTop) * 0.1; // smooth easing
+    cart.style.top = (currentTop + delta) + 'px';
+    requestAnimationFrame(animateCartPosition);
+  }
+    const cartToggleBtn = document.getElementById('cart-toggle-btn');
+const cart = document.getElementById('cart');
+
+cartToggleBtn.addEventListener('click', () => {
+  if (cart.style.display === 'none') {
+    cart.style.display = 'flex';
+    cartToggleBtn.textContent = '✖'; // ikona za zapri
+  } else {
+    cart.style.display = 'none';
+    cartToggleBtn.textContent = '🛒'; // ikona za odpri
+  }
+  window.addEventListener('scroll', () => {
+    targetTop = window.scrollY + 100; // 100px od vrha pogleda
+  });
+
+  animateCartPosition(); // zagon animacije
+})();
 
   let cart = {};
 
@@ -606,24 +638,6 @@ function showMoreInfo(productId) {
   window.location.href = `izdelek${productId}.html`;
 }
   
-window.addEventListener('DOMContentLoaded', () => {
-  const cart = document.getElementById('cart');
-  if (!cart) return;
-
-  const offsetTop = 20;
-  const cartInitialPosition = cart.getBoundingClientRect().top + window.scrollY;
-
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > cartInitialPosition - offsetTop) {
-      cart.style.position = 'fixed';
-      cart.style.top = offsetTop + 'px';
-    } else {
-      cart.style.position = 'static';
-      cart.style.top = 'auto';
-    }
-  });
-});
-
   // Inicijaliziraj košarico ob nalaganju strani
   updateCartUI();
 

@@ -348,19 +348,28 @@
 
     /* Responsive za mobilne naprave */
     @media (max-width: 480px) {
+@media (max-width: 768px) {
   #cart {
-    position: static !important;
-    margin-top: 20px;
-    transform: none !important;
-    opacity: 1 !important;
-    box-shadow: 0 0 0 rgba(0,0,0,0);
-    background: rgba(255, 255, 255, 0.85);
-      }
+    top: 60px !important;
+    right: 10px;
+    left: 10px;
+    width: auto;
+    max-height: 70vh;
+    position: fixed;
+    transform: translateY(100%);
+    border-radius: 12px;
+    bottom: 0;
+  }
+
+  #cart.open {
+    transform: translateY(0);
+  }
       #cart-toggle-btn {
         bottom: 15px;
         right: 15px;
       }
     }
+      
   </style>
 </head>
 <body>
@@ -492,6 +501,8 @@ function followScrollCart() {
   const cart = document.getElementById('cart');
   const cartToggleBtn = document.getElementById('cart-toggle-btn');
   if (!cart || !cartToggleBtn) return;
+
+  if (window.innerWidth < 768) return; // onemogoči scroll-follow na mobilnih
 
   let lastScrollY = window.scrollY;
   let targetTop = lastScrollY + 100;

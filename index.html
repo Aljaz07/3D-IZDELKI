@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
  <link href="dist/output.css" rel="stylesheet">
-  <title>Cenik 3D Izdelkov z košarico</title>
+  <title>3D Izdelki</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     body, html {
@@ -382,9 +382,9 @@
   <main class="grid gap-8 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" style="z-index: 10; position: relative;">
     <!-- Pokrovček za pijačo -->
     <div class="glass product-card" data-product-id="1">
-      <img src="https://via.placeholder.com/300x200?text=Izdelek+1" alt="Izdelek 1" loading="lazy" />
+      <img src="https://drive.google.com/file/d/18HfkfhkOZYEjJTUn4Ucs9DKlUinxXxJ7/view?usp=drive_link" alt="Izdelek 1" loading="lazy" />
       <h2 class="product-title">Pokrovček za pijačo</h2>
-      <p class="product-desc">Edinstven pokrovček za pijačo v pločevinki različnih dimenzij in različnih barv. Velik izbor različnih logotipov na pokrovčku.</p>
+      <p class="product-desc">Edinstven pokrovček za pijačo v pločevinki različnih dizajnov in različnih barv. Velik izbor različnih logotipov na pokrovčku.</p>
       <p class="product-price">Cena: 2 €</p>
 
       <div class="color-options" data-selected-color="Črna" aria-label="Izbira barve pokrovčka za pijačo">
@@ -400,22 +400,23 @@
       </div>
     </div>
 
-    <!-- Izdelek 2 -->
+    <!-- Mali pokrovček za pijačo -->
     <div class="glass product-card" data-product-id="2">
       <img src="https://via.placeholder.com/300x200?text=Izdelek+2" alt="Izdelek 2" loading="lazy" />
-      <h2 class="product-title">Izdelek 2</h2>
-      <p class="product-desc">Unikatni dizajn s prijetnimi materiali.</p>
-      <p class="product-price">Cena: 129 €</p>
+      <h2 class="product-title">Mini pokrovček za pijačo</h2>
+      <p class="product-desc">Edinstven pokrovček za pijačo v pločevinki različnih dizajnov in različnih barv. Velik izbor različnih logotipov na pokrovčku.</p>
+      <p class="product-price">Cena: 1.5 €</p>
 
-      <div class="color-options" data-selected-color="Siva" aria-label="Izbira barve izdelka 2">
-        <div class="color-circle bg-gray-400 selected" title="Siva" onclick="selectColor(this, 2, 'Siva')" role="button" tabindex="0"></div>
-        <div class="color-circle bg-purple-500" title="Vijolična" onclick="selectColor(this, 2, 'Vijolična')" role="button" tabindex="0"></div>
-        <div class="color-circle bg-pink-400" title="Roza" onclick="selectColor(this, 2, 'Roza')" role="button" tabindex="0"></div>
+      <div class="color-options" data-selected-color="Črna" aria-label="Izbira barve pokrovčka za pijačo">
+        <div class="color-circle bg-black selected" title="Črna" onclick="selectColor(this, 2, 'Črna')" role="button" tabindex="0"></div>
+        <div class="color-circle bg-red-500" title="Rdeča" onclick="selectColor(this, 2, 'Rdeča')" role="button" tabindex="0"></div>
+        <div class="color-circle bg-gray-500" title="Siva" onclick="selectColor(this, 2, 'Siva')" role="button" tabindex="0"></div>
+        <div class="color-circle bg-white border" title="Bela" onclick="selectColor(this, 2, 'Bela')" role="button" tabindex="0"></div>
       </div>
 
       <div class="btn-group">
         <button class="btn-primary" onclick="showMoreInfo(2)">Več o izdelku</button>
-        <button class="btn-add" aria-label="Dodaj Izdelek 2 v košarico" onclick="addToCart(2)">+</button>
+        <button class="btn-add" aria-label="Dodaj Mini pokrovček za pijačo v košarico" onclick="addToCart(2)">+</button>
       </div>
     </div>
 

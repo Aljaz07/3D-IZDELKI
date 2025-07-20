@@ -189,9 +189,8 @@
 
     /* Košarica spodaj desno, bolj profesionalen izgled */
     #cart {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
+      position: sticky;
+      top: 20px;
       width: 360px;
       max-height: 500px;
       background: white;
@@ -209,7 +208,7 @@
       transition: transform 0.4s ease, opacity 0.4s ease;
     }
     #cart.open {
-      transform: translateY(0);
+      transform: translateY(110%);
       opacity: 1;
     }
     #cart-header {
@@ -313,9 +312,8 @@
 
     /* Gumb za odpiranje košarice (majhen) */
     #cart-toggle-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
+      position: sticky;
+      top: 20px;
       width: 56px;
       height: 56px;
       background-color: #2563eb;
@@ -464,7 +462,7 @@
     </div>
 
 <div id="cart" aria-label="Košarica z izdelki" 
-     class="fixed top-5 right-5 w-72 bg-white bg-opacity-80 backdrop-blur-md rounded-xl shadow-lg z-[1000] p-4">
+     class="sticky top-5 right-5 w-72 bg-white bg-opacity-80 backdrop-blur-md rounded-xl shadow-lg z-[1000] p-4">
   <div id="cart-header" class="flex justify-between items-center mb-2">
     Košarica
     <button aria-label="Zapri košarico" onclick="toggleCart()" class="text-xl font-bold">×</button>

@@ -188,9 +188,9 @@
     }
 
     /* Košarica spodaj desno, bolj profesionalen izgled */
-  #cart {
+#cart {
   position: absolute;
-  top: 100px; /* začetna vrednost */
+  top: 100px;
   right: 20px;
   width: 360px;
   max-height: 500px;
@@ -204,12 +204,18 @@
   z-index: 9999;
   font-size: 14px;
   user-select: none;
-  transition: top 0.4s ease;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-20px);
 }
-    #cart.open {
-      transform: translateY(110%);
-      opacity: 1;
-    }
+#cart.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
     #cart-header {
       background-color: #2563eb;
       color: white;

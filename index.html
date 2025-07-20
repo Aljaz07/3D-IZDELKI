@@ -482,47 +482,39 @@
     2: { id: 2, name: "Izdelek 2", price: 129 }
   };
 
-  function followScrollCart() {
-  if (!cart) return;
+function followScrollCart() {
+  const cart = document.getElementById('cart');
+  const cartToggleBtn = document.getElementById('cart-toggle-btn');
+  if (!cart || !cartToggleBtn) return;
 
   let lastScrollY = window.scrollY;
   let targetTop = lastScrollY + 100;
 
-document.addEventListener('DOMContentLoaded', () => {
-  const cart = document.getElementById('cart');
-  const cartToggleBtn = document.getElementById('cart-toggle-btn');
-
-  if (!cart || !cartToggleBtn) return;
-
-  // Scroll follow logic
-  let targetTop = window.scrollY + 100;
-
   function animateCartPosition() {
     const currentTop = parseFloat(cart.style.top) || 0;
-    const delta = (targetTop - currentTop) * 0.1;
+    const delta = (targetTop - currentTop) * 0.1; // smooth easing
     cart.style.top = (currentTop + delta) + 'px';
     requestAnimationFrame(animateCartPosition);
   }
 
-  window.addEventListener('scroll', () => {
-    if (!cart.classList.contains('hidden')) {
-      targetTop = window.scrollY + 100;
-    }
-  });
-
-  animateCartPosition(); // Start following on load
-
-  // Toggle button logic
   cartToggleBtn.addEventListener('click', () => {
-    cart.classList.toggle('hidden');
-    cartToggleBtn.textContent = cart.classList.contains('hidden') ? '🛒' : '✖';
-
-    // Reset position on open
-    if (!cart.classList.contains('hidden')) {
-      cart.style.top = window.scrollY + 100 + 'px';
+    if (cart.style.display === 'none' || cart.classList.contains('hidden')) {
+      cart.style.display = 'flex';
+      cartToggleBtn.textContent = '✖'; // ikona za zapri
+      targetTop = window.scrollY + 100;
+      cart.style.top = targetTop + 'px';
+    } else {
+      cart.style.display = 'none';
+      cartToggleBtn.textContent = '🛒'; // ikona za odpri
     }
   });
-});
+
+  window.addEventListener('scroll', () => {
+    targetTop = window.scrollY + 100; // sledi scrollu
+  });
+
+  animateCartPosition(); // zagon animacije
+}
 
   let cart = {};
 
@@ -653,6 +645,5 @@ function showMoreInfo(productId) {
   updateCartUI();
 
 </script>
-
 </body>
 </html>

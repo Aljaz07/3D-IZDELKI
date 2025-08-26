@@ -1,1 +1,158 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Izdelek 5 - Več o izdelku</title>
+  <link href="dist/output.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      min-height: 100vh;
+    }
+    /* Stekleno (glassmorphism) ozadje */
+    .glass {
+      background: rgba(255 255 255 / 0.85);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 16px;
+      border: 1px solid rgba(255 255 255 / 0.3);
+      padding: 32px 40px;
+      max-width: 900px;
+      width: 100%;
+      color: #1f2937; /* temna barva besedila */
+      user-select: none;
+    }
+    h1 {
+      font-weight: 900;
+      font-size: 2.5rem;
+      margin-bottom: 24px;
+      color: #2563eb; /* modra barva */
+    }
+    p {
+      font-size: 1.125rem;
+      line-height: 1.7;
+      margin-bottom: 18px;
+    }
+    .gallery {
+      position: relative;
+      margin-bottom: 30px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      background: #fff; /* bela podlaga za slike za boljšo vidnost */
+    }
+    .gallery img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+    .gallery-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(37, 99, 235, 0.85);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      padding: 8px 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease;
+      z-index: 10;
+    }
+    .gallery-btn:hover {
+      background-color: rgba(37, 99, 235, 1);
+    }
+    .gallery-btn.prev {
+      left: 10px;
+    }
+    .gallery-btn.next {
+      right: 10px;
+    }
+    .btn-back {
+      display: inline-block;
+      background-color: #2563eb;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: 700;
+      color: white;
+      text-decoration: none;
+      user-select: none;
+      transition: background-color 0.3s ease;
+    }
+    .btn-back:hover {
+      background-color: #1e40af;
+    }
+  </style>
+</head>
+<body>
+  <div class="glass" role="main">
+    <h1>Obesek za ključe z QR kodo</h1>
+    <div class="gallery" aria-label="Galerija izdelka">
+      <button class="gallery-btn prev" aria-label="Prejšnja slika">&#10094;</button>
+      <img id="productImage" src="https://media.printables.com/media/prints/29951/images/297427_19ff307c-817b-421e-bbdd-875f71c36199/thumbs/inside/1600x1200/jpg/good-vive.webp" alt="Izdelek 5 - Slika 1" loading="lazy" />
+      <button class="gallery-btn next" aria-label="Naslednja slika">&#10095;</button>
+    </div>
+    <p>Eleganten 3D model z možnostjo različnih barv in dizajnov. Ta izdelek je narejen iz visokokakovostnih materialov in je popoln dodatek za poletne dni.</p>
+    <p><strong>Dimenzije:</strong> Se razlikujejo!</p>
+    <p><strong>Material:</strong> PLA ali PETG plastika z visoko natančnostjo 3D tiska</p>
+    <p><strong>Informacije strankam:</strong> Naprošamo, da v e-mailu navedete še dizajn ali željo!!!</p>
+    <p><strong>Dostopne barve:</strong> Črna, Bela, Rdeča in Siva</p>
+
+    <a href="index.html" class="btn-back" role="link" aria-label="Nazaj na cenik">← Nazaj na cenik</a>
+  </div>
+
+  <script>
+    const images = [
+      {
+        src: 'https://media.printables.com/media/prints/29951/images/297427_19ff307c-817b-421e-bbdd-875f71c36199/thumbs/inside/1600x1200/jpg/good-vive.webp',
+        alt: 'Izdelek 5 - Slika 1'
+      },
+      {
+        src: 'https://media.printables.com/media/prints/617634/images/4901242_05077b99-b67c-4ef9-9bc9-a41a87fd8d8b_ee6da12a-69ea-4954-a431-a8109fadf16f/thumbs/inside/1600x1200/png/mhzyky-mpthvt-halvvyn.webp',
+        alt: 'Izdelek 5 - Slika 2'
+      },
+    ];
+    let currentIndex = 0;
+
+    const productImage = document.getElementById('productImage');
+    const prevBtn = document.querySelector('.gallery-btn.prev');
+    const nextBtn = document.querySelector('.gallery-btn.next');
+
+    function showImage(index) {
+      productImage.src = images[index].src;
+      productImage.alt = images[index].alt;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    });
+  </script>
+</body>
+</html>
 

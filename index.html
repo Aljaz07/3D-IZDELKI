@@ -188,166 +188,7 @@
       margin-top: 12px;
     }
 
-    /* Košarica spodaj desno, bolj profesionalen izgled */
-#cart {
-  position: absolute;
-  top: 100px;
-  right: 20px;
-  width: 360px;
-  max-height: 500px;
-  background: white;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-  color: #1f2937;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  z-index: 9999;
-  font-size: 14px;
-  user-select: none;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-20px);
-}
-#cart.open {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-
-    #cart-header {
-      background-color: #2563eb;
-      color: white;
-      padding: 16px 20px;
-      font-weight: 700;
-      font-size: 1.25rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      user-select: none;
-    }
-    #cart-header button {
-      background: transparent;
-      border: none;
-      color: white;
-      font-size: 28px;
-      cursor: pointer;
-      user-select: none;
-      transition: color 0.3s ease;
-    }
-    #cart-header button:hover {
-      color: #93c5fd;
-    }
-
-    #cart-items {
-      overflow-y: auto;
-      flex-grow: 1;
-      padding: 12px 20px;
-    }
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-      border-bottom: 1px solid #e5e7eb;
-      padding-bottom: 6px;
-    }
-    .cart-item span {
-      max-width: 75%;
-      overflow-wrap: break-word;
-    }
-    .cart-quantity {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .cart-quantity button {
-      border: 1px solid #d1d5db;
-      background: white;
-      cursor: pointer;
-      padding: 2px 8px;
-      font-weight: 700;
-      border-radius: 6px;
-      user-select: none;
-      color: #2563eb;
-      transition: background-color 0.3s ease;
-    }
-    .cart-quantity button:hover {
-      background-color: #eff6ff;
-    }
-    .cart-item-remove {
-      background: transparent;
-      border: none;
-      font-size: 18px;
-      cursor: pointer;
-      color: #ef4444;
-      user-select: none;
-      transition: color 0.3s ease;
-    }
-    .cart-item-remove:hover {
-      color: #b91c1c;
-    }
-
-    #cart-total {
-      padding: 12px 20px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      border-top: 1px solid #e5e7eb;
-      color: #111827;
-      user-select: none;
-    }
-
-    #cart-send {
-      background-color: #2563eb;
-      color: white;
-      border: none;
-      font-weight: 700;
-      padding: 14px 0;
-      width: 100%;
-      border-radius: 0 0 16px 16px;
-      cursor: pointer;
-      user-select: none;
-      transition: background-color 0.3s ease;
-      font-size: 1rem;
-    }
-    #cart-send:hover {
-      background-color: #1e40af;
-    }
-
-    /* Gumb za odpiranje košarice (majhen) */
-    #cart-toggle-btn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 56px;
-      height: 56px;
-      background-color: #2563eb;
-      border-radius: 50%;
-      border: none;
-      color: white;
-      font-size: 28px;
-      cursor: pointer;
-      box-shadow: 0 6px 18px rgba(37,99,235,0.6);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      user-select: none;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      z-index: 10000;
-    }
-    #cart-toggle-btn:hover {
-      background-color: #1e40af;
-      transform: scale(1.1);
-    }
-
-    /* Prikaz/skrivanje toggle gumba glede na stanje košarice */
-    #cart.open + #cart-toggle-btn {
-      display: none;
-    }
-
-    /* Responsive za mobilne naprave */
+      /* Responsive za mobilne naprave */
     @media (max-width: 480px) {
 @media (max-width: 768px) {
   #cart {
@@ -360,14 +201,6 @@
     transform: translateY(100%);
     border-radius: 12px;
     bottom: 0;
-  }
-
-  #cart.open {
-    transform: translateY(0);
-  }
-      #cart-toggle-btn {
-        bottom: 15px;
-        right: 15px;
       }
     }
       
@@ -379,14 +212,24 @@
     <h1 class="text-3d select-none">3D Izdelki</h1>
     <p>Izberi izdelek in oddaj povpraševanje preko košarice</p>
   </header>
-
+  
   <main class="grid gap-8 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4" style="z-index: 10; position: relative;">
+    
+    <div class="container">
+    <form action="sendmail.php" method="POST" enctype="multipart/form-data">
+    <h2>Vaši podatki</h2>
+    <input type="text" name="ime" placeholder="Vaše ime" required>
+    <input type="email" name="email" placeholder="Vaš email" required>
+    
     <!-- Pokrovček za pijačo -->
     <div class="glass product-card" data-product-id="1">
+      <label><input type="checkbox" name="Izdelek[]" value="Izdelek 1"> Pokrovček za pijačo</label>
       <img src="https://media.printables.com/media/prints/263953/images/4431566_0bddaa50-0cff-4182-9932-8de1fd5e58f6/thumbs/inside/1600x1200/jpg/20230813_165026.webp" alt="Izdelek 1" loading="lazy" />
       <h2 class="product-title">Pokrovček za pijačo</h2>
       <p class="product-desc">Edinstven pokrovček za pijačo v pločevinki različnih dizajnov in različnih barv. Velik izbor različnih logotipov na pokrovčku.</p>
       <p class="product-price">Cena: 2 €</p>
+      <textarea name="komentar_izdelek1" placeholder="Komentar / opis"></textarea>
+      <input type="file" name="datoteka_izdelek1">
 
       <div class="color-options" data-selected-color="Črna" aria-label="Izbira barve pokrovčka za pijačo">
         <div class="color-circle bg-black selected" title="Črna" onclick="selectColor(this, 1, 'Črna')" role="button" tabindex="0"></div>
@@ -397,7 +240,6 @@
 
       <div class="btn-group">
         <button class="btn-primary" onclick="showMoreInfo(1)">Več o izdelku</button>
-        <button class="btn-add" aria-label="Dodaj Pokrovček za pijačo v košarico" onclick="addToCart(1)">+</button>
       </div>
     </div>
 
@@ -479,196 +321,6 @@
         <button class="btn-primary" onclick="showMoreInfo(5)">Več o izdelku</button>
         <button class="btn-add" aria-label="Dodaj obesek za ključe v košarico" onclick="addToCart(5)">+</button>
       </div>
-    </div>
-
-<div id="cart" aria-label="Košarica z izdelki" 
-     class="absolute top-5 right-5 w-72 bg-white bg-opacity-80 backdrop-blur-md rounded-xl shadow-lg z-[1000] p-4">
-  <div id="cart-header" class="flex justify-between items-center mb-2">
-    Košarica
-    <button aria-label="Zapri košarico" onclick="toggleCart()" class="text-xl font-bold">×</button>
-  </div>
-  <div id="cart-items" role="list"></div>
-  <div id="cart-total" aria-live="polite"></div>
-  <button id="cart-send" onclick="sendInquiry()" style="display: none;" class="mt-4 bg-blue-600 text-white py-2 rounded">Pošlji povpraševanje</button>
-</div>
-  <button id="cart-toggle-btn" class="animate-bounce" aria-label="Odpri košarico" onclick="toggleCart()">🛒</button>
-<div>
-</div>
-</main>
-  
-<script>
-  const products = {
-    1: { id: 1, name: "Pokrovček za pijačo", price: 2 },
-    2: { id: 2, name: "Mini pokrovček za pijačo", price: 1.5 },
-    3: { id: 3, name: "Pokrovček za silikonske tube", price: 1 },
-    4: { id: 4, name: "Obesek za ključe QR Koda", price: 2.5 },
-    5: { id: 5, name: "Obesek za ključe", price: 2.5 },
-  };
-
-function followScrollCart() {
-  const cart = document.getElementById('cart');
-  const cartToggleBtn = document.getElementById('cart-toggle-btn');
-  if (!cart || !cartToggleBtn) return;
-
-  if (window.innerWidth < 768) return; // onemogoči scroll-follow na mobilnih
-
-  let lastScrollY = window.scrollY;
-  let targetTop = lastScrollY + 100;
-
-  function animateCartPosition() {
-    const currentTop = parseFloat(cart.style.top) || 0;
-    const delta = (targetTop - currentTop) * 0.1; // smooth easing
-    cart.style.top = (currentTop + delta) + 'px';
-    requestAnimationFrame(animateCartPosition);
-  }
-
-  cartToggleBtn.addEventListener('click', () => {
-    if (cart.style.display === 'none' || cart.classList.contains('hidden')) {
-      cart.style.display = 'flex';
-      cartToggleBtn.textContent = '✖'; // ikona za zapri
-      targetTop = window.scrollY + 100;
-      cart.style.top = targetTop + 'px';
-    } else {
-      cart.style.display = 'none';
-      cartToggleBtn.textContent = '🛒'; // ikona za odpri
-    }
-  });
-
-  window.addEventListener('scroll', () => {
-    targetTop = window.scrollY + 100; // sledi scrollu
-  });
-
-  animateCartPosition(); // zagon animacije
-}
-
-  let cart = {};
-
-  function selectColor(el, productId, color) {
-    const container = el.parentElement;
-    [...container.children].forEach(c => c.classList.remove('selected'));
-    el.classList.add('selected');
-    container.dataset.selectedColor = color;
-  }
-
-  function addToCart(productId) {
-    const productCard = document.querySelector(`.product-card[data-product-id="${productId}"]`);
-    const color = productCard.querySelector('.color-options').dataset.selectedColor || 'Brez barve';
-    const key = productId + color;
-
-    if(cart[key]) {
-      cart[key].quantity++;
-    } else {
-      cart[key] = {
-        productId,
-        name: products[productId].name,
-        price: products[productId].price,
-        color,
-        quantity: 1
-      };
-    }
-    updateCartUI();
-    if(document.getElementById('cart').classList.contains('open') === false) {
-      toggleCart();
-    }
-  }
-
-  function removeFromCart(key) {
-    delete cart[key];
-    updateCartUI();
-    if(Object.keys(cart).length === 0) {
-      toggleCart(true);
-    }
-  }
-
-  function changeQuantity(key, delta) {
-    if(!cart[key]) return;
-    cart[key].quantity += delta;
-    if(cart[key].quantity <= 0) {
-      removeFromCart(key);
-    } else {
-      updateCartUI();
-    }
-  }
-
-  function updateCartUI() {
-    const cartItemsContainer = document.getElementById('cart-items');
-    cartItemsContainer.innerHTML = '';
-    let total = 0;
-
-    if(Object.keys(cart).length === 0) {
-      cartItemsContainer.innerHTML = '<p style="text-align:center; color:#6b7280; padding: 20px;">Košarica je prazna.</p>';
-    }
-
-    Object.keys(cart).forEach(key => {
-      const item = cart[key];
-      total += item.price * item.quantity;
-
-      const itemElem = document.createElement('div');
-      itemElem.className = 'cart-item';
-      itemElem.innerHTML = `
-        <span>${item.name} (${item.color})</span>
-        <div class="cart-quantity">
-          <button aria-label="Zmanjšaj količino" onclick="changeQuantity('${key}', -1)">−</button>
-          <span>${item.quantity}</span>
-          <button aria-label="Povečaj količino" onclick="changeQuantity('${key}', 1)">+</button>
-          <button class="cart-item-remove" aria-label="Odstrani iz košarice" onclick="removeFromCart('${key}')">×</button>
-        </div>
-      `;
-      cartItemsContainer.appendChild(itemElem);
-    });
-    document.getElementById('cart-total').textContent = `Skupaj: ${total} €`;
-    document.getElementById('cart-send').style.display = total > 0 ? 'block' : 'none';
-  }
-
-function toggleCart(forceClose = false) {
-  const cartEl = document.getElementById('cart');
-  const toggleBtn = document.getElementById('cart-toggle-btn');
-  const isMobile = window.innerWidth <= 480;
-
-  if (forceClose) {
-    cartEl.classList.remove('open');
-    toggleBtn.style.display = 'flex';
-    return;
-  }
-
-  if (cartEl.classList.contains('open')) {
-    cartEl.classList.remove('open');
-    toggleBtn.style.display = 'flex';
-  } else {
-    if (isMobile) {
-      cartEl.classList.add('open');
-      toggleBtn.style.display = 'none';
-      // Scroll do košarice
-      cartEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    } else {
-      cartEl.classList.add('open');
-      toggleBtn.style.display = 'none';
-    }
-  }
-}
-
-  function sendInquiry() {
-    if(Object.keys(cart).length === 0) {
-      alert('Košarica je prazna.');
-      return;
-    }
-    let body = 'Pozdravljeni,%0D%0A%0D%0APovprašujem za naslednje 3D izdelke:%0D%0A';
-    Object.values(cart).forEach(item => {
-      body += `- ${item.name} (${item.color}), količina: ${item.quantity}, cena na kos: ${item.price} €%0D%0A`;
-    });
-    body += '%0D%0ALep pozdrav,%0D%0A[Vaše ime]';
-
-  window.location.href = `mailto:aljaz.freelance@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-}
-
-function showMoreInfo(productId) {
-  // Preusmeritev na podstran za izdelek, npr. izdelek1.html
-  window.location.href = `izdelek${productId}.html`;
-}
-  
-  // Inicijaliziraj košarico ob nalaganju strani
-  updateCartUI();
-
-</script>
+    </div> 
 </body>
 </html>
